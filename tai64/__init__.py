@@ -1,1 +1,1 @@
-from tai64n import decode_tai64n, tai2utc, utc2tai
+from tai64n import decode_tai64n, utc2tai

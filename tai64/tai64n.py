@@ -1,42 +1,11 @@
 #!/usr/bin/env python
 
-from datetime import datetime, timedelta, tzinfo
+from datetime import datetime, timedelta
 from operator import itemgetter
 
-class DecodeError(Exception):
+
+class TAI64DecodeError(Exception):
     pass
-
-
-class TAI64DecodeError(DecodeError):
-    pass
-
-
-def decode_tai64n(hexdec, basedate=datetime(1970, 1, 1)):
-    """ returns a datetime (TAI, not UTC!) object from tai64 string
-    
-        Example
-            >>> # (from http://cr.yp.to.mirror.dogmap.org/libtai/tai64.html)
-            >>> decode_tai64n("400000002a2b2c2d")
-            datetime.datetime(1992, 6, 2, 8, 7, 9)
-            >>> # a more recent one
-            >>> decode_tai64n("400000004a32392b2aa21dac")
-            datetime.datetime(2009, 6, 12, 11, 16, 59, 715267)
-    """
-    try:
-        nano_hex = (len(hexdec) == 24) and hexdec[16:24]
-    except IndexError:
-        pass
-    try:
-        tai_int = int(hexdec[0:16], 16)
-        nano_int = nano_hex and int(nano_hex, 16)
-    except:
-        raise TAI64DecodeError("'%s' not a valid hex value." % hexdec)
-    # we decode only after 01.01.1970
-    seconds = tai_int - 4611686018427387904L
-    if seconds < 0:
-        raise TAI64DecodeError("I won't decode gone millenia "
-                               "(i.e. nothing prior to 01.01.1970).")
-    return basedate + timedelta(0, seconds, nano_int/1000)
 
 
 def __conversion_table():
@@ -94,12 +63,12 @@ def __tai_seconds(date, table=__conversion_table()):
     return False
 
 
-def tai2utc(date):
+def __tai2utc(date):
     """ converts datetime.datetime TAI to datetime.datetime UTC.
         Works only on dates later than 01.01.1972.
     
     Example
-        >>> tai2utc(datetime(1992, 6, 2, 8, 7, 9))
+        >>> __tai2utc(datetime(1992, 6, 2, 8, 7, 9))
         datetime.datetime(1992, 6, 2, 8, 6, 43)
     """
     seconds = __tai_seconds(date)
@@ -116,6 +85,41 @@ def utc2tai(date):
     """
     seconds = __tai_seconds(date)
     return seconds and (date + timedelta(0, seconds))
+
+
+def decode_tai64n(hexstring, basedate=datetime(1970, 1, 1)):
+    """ returns a datetime.datetime (UTC) object from a tai64(n) string.
+        Works only on dates after 01.01.1972.
+        
+        Args
+            hexstring: string containig TAI64(n) value
+            basedate: DO NOT USE (speeds up repeated use of this function)
+        
+        Returns
+            a datetime.datetime object at UTC
+        
+        Example
+            (from http://cr.yp.to.mirror.dogmap.org/libtai/tai64.html)
+            >>> decode_tai64n("400000002a2b2c2d")
+            datetime.datetime(1992, 6, 2, 8, 6, 43)
+            >>> decode_tai64n("400000004a32392b2aa21dac")
+            datetime.datetime(2009, 6, 12, 11, 16, 25, 715267)
+    """
+    try:
+        nano_hex = (len(hexstring) == 24) and hexstring[16:24]
+    except IndexError:
+        pass
+    try:
+        tai_int = int(hexstring[0:16], 16)
+        nano_int = nano_hex and int(nano_hex, 16)
+    except:
+        raise TAI64DecodeError("'%s' not a valid hex value." % hexstring)
+    # we decode only dates later than 01.01.1972
+    seconds = tai_int - 4611686018427387904L
+    if seconds < 0:
+        raise TAI64DecodeError("I won't decode gone millenia "
+                               "(i.e. nothing prior to 01.01.1972).")
+    return __tai2utc(basedate + timedelta(0, seconds, nano_int/1000))
 
 
 if __name__ == '__main__':
