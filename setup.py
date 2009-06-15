@@ -5,18 +5,18 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "py-tai64",
+    name = "tai64",
     version = "1.0.0",
     url = 'http://bitbucket.com/hinnerk/TAI64Converter',
     license = 'BSD',
-    description = "Converts Temps Atomique International (TAI) to UTC.",
-    long_description = read('README'),
+    description = "Converts TAI64(n) string to datetime.datetime (UTC) object.",
+    long_description = read('README.rst'),
 
     author = 'Hinnerk Haardt',
     author_email = 'hinnerk@randnotizen.de',
 
-    packages = find_packages('py-tai64'),
-    package_dir = {'': 'py-tai64'},
+    packages = find_packages('tai64'),
+    package_dir = {'': 'tai64'},
     
     install_requires = ['setuptools'],
 
