@@ -9,7 +9,8 @@ class TAI64DecodeError(Exception):
 
 
 def __conversion_table():
-    """ returns [datetime, value] where value == seconds between TAI and UTC
+    """ returns [datetime, value] ordered reverse by date
+        where value == seconds between TAI and UTC
     
     Example:
     >>> __conversion_table()[-1]
