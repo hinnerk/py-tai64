@@ -4,3 +4,5 @@
 .*\.pyc($|/)
 .project
 .pydevproject
+dist
+tai64n/tai64n.egg-info
