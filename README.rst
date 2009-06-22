@@ -1,5 +1,5 @@
 ========
-py-tai64
+tai64n
 ========
 
 A module to convert a hex encoded tai64n string to a datetime.datetime object and
