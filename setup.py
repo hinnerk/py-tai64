@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "tai64n",
-    version = "0.2",
+    version = "0.3",
     url = 'http://bitbucket.org/hinnerk/py-tai64n/',
     license = 'BSD',
     description = "Converts TAI64(n) string to datetime.datetime (UTC) object.",
