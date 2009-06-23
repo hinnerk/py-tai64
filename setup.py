@@ -15,8 +15,8 @@ setup(
     author = 'Hinnerk Haardt',
     author_email = 'hinnerk@randnotizen.de',
 
-    packages = find_packages('tai64n'),
-    package_dir = {'': 'tai64n'},
+    packages = find_packages('src'),
+    package_dir = {'': 'src'},
     
     install_requires = ['setuptools'],
 
