@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """ Module to read and convert TAI64(n) hex strings as used by DJBDNS.
 
     decode_tai64n("hex_string")

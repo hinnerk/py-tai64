@@ -5,4 +5,4 @@
 .project
 .pydevproject
 dist
-src/tai64n.egg-info
+tai64n.egg-info

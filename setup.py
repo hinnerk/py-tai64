@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name = "tai64n",
-    version = "0.3.2",
+    version = "0.3.3",
     url = 'http://bitbucket.org/hinnerk/py-tai64n/',
     license = 'BSD',
     description = "Converts TAI64(n) string to datetime.datetime (UTC) object.",
@@ -17,8 +17,7 @@ setup(
     author = 'Hinnerk Haardt',
     author_email = 'hinnerk@randnotizen.de',
 
-    packages = find_packages('src'),
-    package_dir = {'': 'src'},
+    packages = ['tai64n'],
     
     install_requires = ['setuptools'],
 
