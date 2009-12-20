@@ -59,6 +59,7 @@ def __conversion_table():
     conversion_table.sort(key=itemgetter(0), reverse=True)
     return conversion_table
 
+
 def __tai_seconds(date, table=__conversion_table()):
     """ returns seconds of TAI-offset from UTC at date given.
         Works only on dates later than 01.01.1972.
