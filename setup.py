@@ -12,7 +12,7 @@ setup(
     url = 'http://bitbucket.org/hinnerk/py-tai64n/',
     license = 'BSD',
     description = "Converts TAI64(n) string to datetime.datetime (UTC) object.",
-    long_description = read('README'),
+    long_description = read('README.md'),
 
     author = 'Hinnerk Haardt',
     author_email = 'hinnerk@randnotizen.de',
