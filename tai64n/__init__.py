@@ -54,6 +54,7 @@ def __conversion_table():
                         (datetime(1999, 01,  1), 32.0),
                         (datetime(2006, 01,  1), 33.0),
                         (datetime(2009, 01,  1), 34.0),
+                        (datetime(2012, 07,  1), 35.0),
                         # add new values here
                        ]
     conversion_table.sort(key=itemgetter(0), reverse=True)
